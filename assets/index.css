@@ -1,0 +1,21 @@
+#container{
+  width: 50vw;
+  height: 50vh;
+  border: black inset 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+#screen{
+  width: 90%;
+  height: 25%;
+  border: black inset 1px;
+  margin: 5px;
+}
+
+#btns{
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
