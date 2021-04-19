@@ -1,7 +1,7 @@
 const lbls = [
   {
     name: '%',
-    type: 'opr',
+    type: 'percentage',
   },
   {
     name: 'C',
@@ -70,7 +70,7 @@ const lbls = [
   },
   {
     name: '.',
-    type: 'opr'
+    type: 'chr'
   },
   {
     name: '0',
@@ -78,7 +78,7 @@ const lbls = [
   },
   {
     name: '-/+',
-    type: 'opr'
+    type: 'negative'
   },
   {
     name: '÷',

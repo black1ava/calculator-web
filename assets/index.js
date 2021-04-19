@@ -1,10 +1,11 @@
 const btns = document.querySelector('#btns');
 const screen = document.querySelector('#screen');
 
-const indicator = {
+const initialState = {
   a: '',
   b: '',
-  operator: ''
+  operator: '',
+  state: ''
 };
 
 lbls.forEach(function(lbl){
@@ -14,6 +15,11 @@ lbls.forEach(function(lbl){
   switch(lbl.type){
     case 'chr':
       button.addEventListener('click', () => {
+        
+        if(initialState.state === 'done'){
+          clear();
+        }
+        
         if(screen.innerHTML.length < 18){
           screen.innerHTML += lbl.name;
         }
@@ -22,8 +28,7 @@ lbls.forEach(function(lbl){
       
     case 'clr':
       button.addEventListener('click', () => {
-        screen.innerHTML = '';
-        indicator.a = indicator.b = indicator.operator = '';
+        clear();
       })
       break;
       
@@ -35,7 +40,19 @@ lbls.forEach(function(lbl){
       
     case 'sgn':
       calF(lbl);
-    break;
+      break;
+    
+    case 'negative':
+      button.addEventListener('click', () => {
+        screen.innerHTML = (-1 * parseInt(screen.innerHTML)).toString();
+      });
+      break;
+     
+    case 'percentage':
+      button.addEventListener('click', () => {
+        screen.innerHTML = (parseInt(screen.innerHTML) / 100).toString();
+      });
+      break;
       
     default:
       console.log(`type ${lbl.type} is undefined`);
@@ -43,24 +60,59 @@ lbls.forEach(function(lbl){
   
   function calF(lbl){
     switch(lbl.sign){
-      case 'plus':
-        button.addEventListener('click', () => {
-          indicator.a = screen.innerHTML;
-          indicator.operator = lbl.sign;
-          screen.innerHTML = '';
-        });
-        break;
-        
       case 'equal':
         button.addEventListener('click', () => {
-          console.log(indicator);
+          cal();
         });
         break;
         
       default:
-        console.log(`${ lbl.sign } sign is undefined`);
+        button.addEventListener('click', () => {
+         initialState.a = screen.innerHTML;
+          initialState.operator = lbl.sign;
+          screen.innerHTML = '';
+        });
     }
   }
   
   btns.appendChild(button);
 });
+
+function clear(){
+  screen.innerHTML = '';
+  Object.keys(initialState).forEach(key => {
+    initialState[key] = ''
+  });
+  
+}
+
+function cal(){
+  switch(initialState.operator){
+    case 'plus':
+      initialState.b = screen.innerHTML;
+      screen.innerHTML = (parseFloat(initialState.a) + parseFloat(initialState.b)).toString();
+      initialState.state = 'done';
+      break;
+        
+    case 'minus':
+      initialState.b = screen.innerHTML;
+      screen.innerHTML = (parseFloat(initialState.a) - parseFloat(initialState.b)).toString();
+      initialState.state = 'done';
+      break;
+      
+    case 'multiply':
+      initialState.b = screen.innerHTML;
+      screen.innerHTML = (parseFloat(initialState.a) * parseFloat(initialState.b)).toString();
+      initialState.state = 'done';
+      break;
+      
+    case 'divide':
+      initialState.b = screen.innerHTML;
+      screen.innerHTML = (parseFloat(initialState.a) / parseFloat(initialState.b)).toString();
+      initialState.state = 'done';
+      break;
+      
+    default:
+      console.log(`${ initialState.operator } operator is undefined`);
+  }
+}
