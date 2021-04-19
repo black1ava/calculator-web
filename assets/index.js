@@ -44,13 +44,13 @@ lbls.forEach(function(lbl){
     
     case 'negative':
       button.addEventListener('click', () => {
-        screen.innerHTML = (-1 * parseInt(screen.innerHTML)).toString();
+        screen.innerHTML = (-1 * parseFloat(screen.innerHTML)).toString();
       });
       break;
      
     case 'percentage':
       button.addEventListener('click', () => {
-        screen.innerHTML = (parseInt(screen.innerHTML) / 100).toString();
+        screen.innerHTML = (parseFloat(screen.innerHTML) / 100).toString();
       });
       break;
       
