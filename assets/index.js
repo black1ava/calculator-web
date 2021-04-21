@@ -72,8 +72,8 @@ lbls.forEach(function(lbl){
             screen.innerHTML = '';
           }else{
             initialState.b = screen.innerHTML;
-            initialState.operator = lbl.sign;
             initialState.a = cal();
+            initialState.operator = lbl.sign;
             screen.innerHTML = '';
           }
         });
