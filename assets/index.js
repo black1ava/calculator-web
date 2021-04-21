@@ -4,8 +4,7 @@ const screen = document.querySelector('#screen');
 const initialState = {
   a: '',
   b: '',
-  operator: '',
-  state: ''
+  operator: ''
 };
 
 lbls.forEach(function(lbl){
@@ -15,11 +14,6 @@ lbls.forEach(function(lbl){
   switch(lbl.type){
     case 'chr':
       button.addEventListener('click', () => {
-        
-        if(initialState.state === 'done'){
-          clear();
-        }
-        
         if(screen.innerHTML.length < 18){
           screen.innerHTML += lbl.name;
         }
@@ -62,15 +56,26 @@ lbls.forEach(function(lbl){
     switch(lbl.sign){
       case 'equal':
         button.addEventListener('click', () => {
-          cal();
+          initialState.b = screen.innerHTML;
+          screen.innerHTML = cal();
+          Object.keys(initialState).forEach(key => {
+            initialState[key] = '';
+          });
         });
         break;
         
       default:
         button.addEventListener('click', () => {
-         initialState.a = screen.innerHTML;
-          initialState.operator = lbl.sign;
-          screen.innerHTML = '';
+          if(initialState.a === ''){
+            initialState.a = screen.innerHTML;
+            initialState.operator = lbl.sign;
+            screen.innerHTML = '';
+          }else{
+            initialState.b = screen.innerHTML;
+            initialState.operator = lbl.sign;
+            initialState.a = cal();
+            screen.innerHTML = '';
+          }
         });
     }
   }
@@ -89,27 +94,19 @@ function clear(){
 function cal(){
   switch(initialState.operator){
     case 'plus':
-      initialState.b = screen.innerHTML;
-      screen.innerHTML = (parseFloat(initialState.a) + parseFloat(initialState.b)).toString();
-      initialState.state = 'done';
+      return (parseFloat(initialState.a) + parseFloat(initialState.b)).toString();
       break;
         
     case 'minus':
-      initialState.b = screen.innerHTML;
-      screen.innerHTML = (parseFloat(initialState.a) - parseFloat(initialState.b)).toString();
-      initialState.state = 'done';
+      return (parseFloat(initialState.a) - parseFloat(initialState.b)).toString();
       break;
       
     case 'multiply':
-      initialState.b = screen.innerHTML;
-      screen.innerHTML = (parseFloat(initialState.a) * parseFloat(initialState.b)).toString();
-      initialState.state = 'done';
+      return (parseFloat(initialState.a) * parseFloat(initialState.b)).toString();
       break;
       
     case 'divide':
-      initialState.b = screen.innerHTML;
-      screen.innerHTML = (parseFloat(initialState.a) / parseFloat(initialState.b)).toString();
-      initialState.state = 'done';
+      return (parseFloat(initialState.a) / parseFloat(initialState.b)).toString();
       break;
       
     default:
