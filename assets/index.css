@@ -1,16 +1,17 @@
 #container{
   width: 50vw;
-  height: 50vh;
+  height: 90vh;
   border: black inset 1px;
   display: flex;
   flex-direction: column;
 }
 
 #screen{
-  width: 90%;
+  width: 98%;
   height: 25%;
   border: black inset 1px;
   margin: 5px;
+  font-size: 50px;
 }
 
 #btns{
@@ -18,4 +19,8 @@
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
+}
+
+button{
+  height: 75px;
 }

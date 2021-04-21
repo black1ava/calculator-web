@@ -14,7 +14,7 @@ lbls.forEach(function(lbl){
   switch(lbl.type){
     case 'chr':
       button.addEventListener('click', () => {
-        if(screen.innerHTML.length < 18){
+        if(screen.innerHTML.length < 27){
           screen.innerHTML += lbl.name;
         }
       });
