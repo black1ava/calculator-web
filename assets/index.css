@@ -4,6 +4,7 @@
   border: black inset 1px;
   display: flex;
   flex-direction: column;
+  margin-left: 20%;
 }
 
 #screen{
@@ -23,4 +24,5 @@
 
 button{
   height: 75px;
+  font-size: 50px;
 }
